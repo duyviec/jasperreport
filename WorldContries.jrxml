@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="WorldContries" pageWidth="842" pageHeight="650" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" scriptletClass="com.duyviec.MyScriptlet" uuid="f3ae79f5-6ba3-47ae-ac54-db631290d539">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="columnHeader" forecolor="#000000" hAlign="Left" vAlign="Middle" fontSize="14" isBold="true" isItalic="false" isUnderline="true" isStrikeThrough="false"/>
+	<style name="continentGroupHeader" forecolor="#CCFFCC" hAlign="Center" vAlign="Top" fontSize="11" isBold="true" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+	<style name="contentText" forecolor="#333333" backcolor="#FFFFFF" hAlign="Left" vAlign="Middle" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<style name="contentNumber" forecolor="#000000" hAlign="Right" vAlign="Middle" pattern="#,##0" isBlankWhenNull="true" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["repo:/public/Samples/Reports/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from country order by Continent, Region]]>
+	</queryString>
+	<field name="Code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Continent" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Region" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SurfaceArea" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IndepYear" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Population" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LifeExpectancy" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GNP" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GNPOld" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LocalName" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GovernmentForm" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HeadOfState" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Capital" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Code2" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<sortField name="Continent"/>
+	<variable name="ContinentIndex" class="java.lang.Integer" resetType="Group" resetGroup="Continent" calculation="System">
+		<initialValueExpression><![CDATA[($V{ContinentIndex} == null)? (new Integer(1)) : (new Integer($V{ContinentIndex}.intValue() + 1))]]></initialValueExpression>
+	</variable>
+	<variable name="RegionIndex" class="java.lang.Integer" resetType="Group" resetGroup="Region" calculation="System">
+		<initialValueExpression><![CDATA[($V{RegionIndex} == null)? (new Integer(1)) : (new Integer($V{RegionIndex}.intValue() + 1))]]></initialValueExpression>
+	</variable>
+	<group name="Continent" isStartNewPage="true" minHeightToStartNewPage="60">
+		<groupExpression><![CDATA[$F{Continent}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<rectangle>
+					<reportElement uuid="0eee13e2-03e5-4226-9292-4d0084065f52" x="0" y="1" width="802" height="20" backcolor="#330033"/>
+				</rectangle>
+				<textField>
+					<reportElement uuid="c3b8dfdc-c893-4b47-9666-29d2050b9ffc" style="continentGroupHeader" x="34" y="1" width="513" height="20"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA["  " + String.valueOf($V{ContinentIndex}) + ". " + String.valueOf($F{Continent})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="cdd007e2-1bbe-4da0-97b6-5b68088c13c5" style="continentGroupHeader" x="0" y="1" width="30" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$P{REPORT_SCRIPTLET}.convertIntToNum($V{ContinentIndex})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="39" splitType="Prevent">
+				<line>
+					<reportElement uuid="93f14a37-324e-4c95-a73d-fa4f012ce98e" x="0" y="2" width="802" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Double"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement uuid="a8ff3409-2159-4cab-abf5-1fde7ac84814" style="contentNumber" x="750" y="8" width="50" height="20"/>
+					<textElement textAlignment="Left">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Continent_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="03a12887-4d6b-4a45-8b7f-4886a66fa8c9" style="columnHeader" x="350" y="8" width="400" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Total Countries in " + $F{Continent} + " continent:  "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Region" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{Region}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<rectangle>
+					<reportElement uuid="ca51417a-eb99-4f9c-919e-5b70a3d5dab0" x="0" y="1" width="802" height="20" backcolor="#FFFFCC"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement uuid="4d0d4a41-be85-40bd-950e-35344d7c64b2" style="continentGroupHeader" x="40" y="1" width="513" height="20" forecolor="#660000"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA["  " + String.valueOf($V{RegionIndex}) + ". " + String.valueOf($F{Region})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="40" splitType="Prevent">
+				<line>
+					<reportElement uuid="19d09ea0-9994-41b3-86b1-356a94eb0229" x="500" y="10" width="300" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.5" lineStyle="Dotted" lineColor="#660000"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement uuid="1b885fb8-33f6-4260-9fbe-90dc4de1d4c9" style="contentNumber" x="750" y="16" width="50" height="20"/>
+					<textElement textAlignment="Left">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Region_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="d2278929-963e-4b7d-8fd1-0e711d41b75d" style="columnHeader" x="381" y="16" width="357" height="20"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA["Countries in " + String.valueOf($F{Region}) + ": "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="EvenGroup">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="300" splitType="Stretch">
+				<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 1 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				<rectangle>
+					<reportElement uuid="13f94827-9107-4fed-b82b-808588ee448b" x="0" y="1" width="802" height="30"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement uuid="9009a0e5-eabf-4b96-b5dc-60be04687820" style="contentText" x="0" y="1" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="bb6f98ff-d21e-47e2-a88e-8bc21fcffad2" style="contentText" x="151" y="1" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{GovernmentForm}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ea60162b-b80d-42fd-9150-fc8c1301ee52" style="contentText" x="302" y="1" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{HeadOfState}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="0979962c-36da-4716-acbd-ce8a2152fb8d" style="contentNumber" x="454" y="1" width="130" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Population}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="e035d7e4-b687-4a38-ae82-a2991fa3f0ae" style="contentNumber" x="584" y="1" width="120" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{SurfaceArea}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4e22d8b5-aaf5-4082-b05b-c3a962b73e18" style="contentNumber" mode="Opaque" x="704" y="1" width="50" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Capital}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="adc508b0-9c9d-4ea3-8f89-eeeaca67c90e" style="contentNumber" x="754" y="1" width="48" height="30"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Code2}]]></textFieldExpression>
+				</textField>
+				<subreport runToBottom="false">
+					<reportElement uuid="46728de4-1204-40b3-a26d-032e79018704" x="0" y="35" width="802" height="250" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="CountryName">
+						<subreportParameterExpression><![CDATA[$F{Name}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="CountryCode">
+						<subreportParameterExpression><![CDATA[$F{Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CitiReport.jrxml"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="OddGroup">
+		<groupExpression><![CDATA[$V{REPORT_COUNT}]]></groupExpression>
+		<groupHeader>
+			<band height="300" splitType="Stretch">
+				<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 0 ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				<rectangle>
+					<reportElement uuid="ed7898ed-6b3f-41b7-8ee0-be48b1a7fda6" x="0" y="0" width="802" height="30" backcolor="#99CCFF"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement uuid="ecccc0e0-456a-4554-89e2-d77a527d459a" style="contentText" x="0" y="0" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="bc2b7ec9-f5e4-4942-9192-bd314856fbfc" style="contentText" x="150" y="0" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{GovernmentForm}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f6fd9633-39ee-4f2c-988d-72e729609cb6" style="contentText" x="302" y="0" width="150" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{HeadOfState}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="915f6bd2-e904-4c21-83b8-2c029d2f7638" style="contentNumber" x="454" y="0" width="130" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Population}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b2d2cedb-5ae1-4c36-8741-a76889b27485" style="contentNumber" x="584" y="0" width="120" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{SurfaceArea}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="403ecb51-c03c-414f-9a0e-5bf9e4b96121" style="contentNumber" x="704" y="0" width="50" height="30"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{Capital}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f244fc89-1760-45e0-83b1-84d7aaa0151c" style="contentNumber" x="754" y="0" width="48" height="30"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{Code2}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement uuid="e9db9201-be5e-4bdb-b510-0ea6a9e6b667" x="0" y="35" width="802" height="250" isRemoveLineWhenBlank="true"/>
+					<subreportParameter name="CountryName">
+						<subreportParameterExpression><![CDATA[$F{Name}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="CountryCode">
+						<subreportParameterExpression><![CDATA[$F{Code}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CitiReport.jrxml"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="bbd246b4-e49f-4c14-b912-1c87803b27bd" x="285" y="0" width="269" height="51"/>
+				<textElement textAlignment="Center">
+					<font fontName="Script" size="34" isBold="true"/>
+				</textElement>
+				<text><![CDATA[World Countries]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="40e09095-9ef0-4d3d-8a9e-254e86e9aa11" x="0" y="55" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="4.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="58901171-65b6-49b3-87bb-f15742dcb20d" x="0" y="5" width="802" height="30" backcolor="#33CCFF"/>
+				<graphicElement>
+					<pen lineColor="#D4D0C8"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="de48b966-863b-4c46-9997-d475432f55d5" style="columnHeader" x="0" y="5" width="150" height="30"/>
+				<textElement>
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="786e6998-f70e-44fb-a166-7e635f335a62" style="columnHeader" x="151" y="5" width="150" height="30"/>
+				<textElement>
+					<font isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Goverment Form]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="957972a6-ccc6-4570-8d96-d4cfbec7c288" style="columnHeader" x="302" y="5" width="150" height="30"/>
+				<textElement/>
+				<text><![CDATA[Head Of State]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="65f9228d-3c76-46b9-a1f3-c302eae52a93" style="columnHeader" x="581" y="5" width="121" height="30"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Surface Area]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9e189eee-c03e-4b12-b0dc-dc1b443b8cfe" style="columnHeader" x="453" y="5" width="128" height="30"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Population]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="002cb25f-f49a-4040-abb2-7e9100b23e03" style="columnHeader" x="702" y="5" width="50" height="30"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Capital]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="35425175-4465-4196-92b4-df0a5da25b3e" style="columnHeader" x="752" y="5" width="50" height="30"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Code]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement uuid="b0b7f3e5-1ed4-485a-a78b-9570875a4ad9" x="0" y="10" width="802" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="445a17a6-0910-400e-87bf-f9b140c9e64e" style="columnHeader" mode="Opaque" x="68" y="11" width="386" height="25"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + String.valueOf($V{PAGE_NUMBER}) + " of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="aa980835-7ec5-4a75-8552-79d958115173" style="columnHeader" mode="Opaque" x="464" y="11" width="219" height="25"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
